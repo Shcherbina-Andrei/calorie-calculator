@@ -1,5 +1,6 @@
 import {displayResult} from './dispay-calculation-result.js';
 import {resetResult} from './dispay-calculation-result.js';
+import {pristine} from './calculation-validate.js';
 
 const calculationForm = document.querySelector('.counter__form');
 const submitButtonElement = document.querySelector('.form__submit-button');
@@ -16,6 +17,7 @@ let currentGender;
 let currentActivity;
 
 const setDefaultFormSetting = function () {
+  pristine.reset();
   genderRadioElements.forEach((element) => {
     if (element.value === 'male') {
       element.checked = true;
@@ -44,11 +46,7 @@ calculationForm.addEventListener('change', (evt) => {
       currentActivity = element.value;
     }
   });
-
-  if (ageElement.value !== '' || weightElement.value !== '' || heightElement.value !== '') {
-    submitButtonElement.disabled = false;
-  }
-  if (ageElement.value !== '' && weightElement.value !== '' && heightElement.value !== '') {
+  if (pristine.validate(ageElement) && pristine.validate(heightElement) && pristine.validate(weightElement)) {
     submitButtonElement.disabled = false;
   } else {
     submitButtonElement.disabled = true;

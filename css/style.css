@@ -646,3 +646,11 @@ input[type="number"] {
 
   cursor: not-allowed;
 }
+
+.error {
+  margin-top: 5px;
+  font-size: 14px;
+  width: min-content;
+  color: #fd3636;
+  text-align: center;
+}
